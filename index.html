@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <div class="loading-screen" id="loadingScreen" role="status" aria-label="Carregando">
+      <div class="loading-logo" aria-label="Espaço reservado para a logo">LOGO</div>
+      <span class="loading-title">arco<span>.</span></span>
+      <div class="loading-track"><i></i></div>
+    </div>
     <header class="topbar"><a class="brand" href="#inicio" aria-label="Arco, início"><span class="brand-mark">◒</span> arco<span class="brand-dot">.</span></a>
       <nav class="tabs" role="tablist" aria-label="Seções">
         <button class="active" role="tab" aria-selected="true" aria-controls="laboratorio" data-tab="laboratorio">Laboratório</button>
@@ -32,8 +37,8 @@
               <div class="svg-holder">
                 <svg id="circle" viewBox="0 0 460 460" role="img" aria-label="Círculo trigonométrico interativo">
                   <defs>
-                    <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
-                      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#e5e9e3" stroke-width="1"/>
+                    <pattern id="grid" width="66.6667" height="66.6667" patternUnits="userSpaceOnUse">
+                      <path d="M 66.6667 0 L 0 0 0 66.6667" fill="none" stroke="#e5e9e3" stroke-width="1"/>
                     </pattern>
                   </defs>
                   <rect x="30" y="30" width="400" height="400" fill="url(#grid)"/>
@@ -41,7 +46,7 @@
                   <line x1="30" y1="230" x2="430" y2="230" class="axis"/>
                   <line x1="230" y1="430" x2="230" y2="30" class="axis"/>
                   <path d="M 426 225 L 436 230 L 426 235 M 225 34 L 230 24 L 235 34" class="axis-head"/>
-                  <circle cx="230" cy="230" r="140" class="unit-circle"/>
+                  <circle cx="230" cy="230" r="66.6667" class="unit-circle"/>
                   <path id="arc" class="angle-arc" d=""/>
                   <line id="radius" x1="230" y1="230" x2="336" y2="124" class="radius"/>
                   <line id="radiusExtension" x1="230" y1="230" x2="420" y2="40" class="radius-extension"/>
@@ -55,16 +60,14 @@
                   <line id="cotLine" x1="230" y1="90" x2="370" y2="90" class="reciprocal-cot"/>
                   <line id="pointTangent" x1="250" y1="100" x2="400" y2="250" class="point-tangent"/>
                   <path id="tangentRightAngle" class="tangent-right-angle" d=""/>
-                  <circle id="secPoint" cx="355" cy="230" r="5" class="reciprocal-point sec-point"/>
-                  <circle id="cscPoint" cx="230" cy="105" r="5" class="reciprocal-point csc-point"/>
-                  <circle id="reciprocalPoint" cx="355" cy="105" r="5" class="reciprocal-point"/>
+                  <circle id="secPoint" cx="355" cy="230" r="2.4" class="reciprocal-point sec-point"/>
+                  <circle id="cscPoint" cx="230" cy="105" r="2.4" class="reciprocal-point csc-point"/>
+                  <circle id="reciprocalPoint" cx="355" cy="105" r="2.4" class="reciprocal-point"/>
                   <circle cx="230" cy="230" r="4" class="origin-dot"/>
-                  <circle id="point" cx="336" cy="124" r="7" class="point"/>
+                  <circle id="point" cx="336" cy="124" r="3.3" class="point"/>
                   <text x="437" y="220" class="axis-label">x</text>
                   <text x="240" y="25" class="axis-label">y</text>
                   <text x="222" y="252" class="origin-label">0</text>
-                  <text id="xUnitLabel" x="370" y="250" class="tick-label">1</text>
-                  <text id="yUnitLabel" x="208" y="90" class="tick-label">1</text>
                   <text id="cosLabel" x="280" y="250" class="measure-label cosine-label">cos</text>
                   <text id="sinLabel" x="343" y="178" class="measure-label sine-label">sen</text>
                   <text id="tanLabel" x="386" y="178" class="measure-label tangent-label">tg</text>

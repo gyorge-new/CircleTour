@@ -65,7 +65,7 @@ const graphMarkers = {
 const graphButtons = [...document.querySelectorAll('[data-graph]')];
 let functionFamily = 'common';
 let selectedGraph = 'sin';
-const center = 230, radiusSize = 140;
+const center = 230, radiusSize = 200 / 3;
 document.querySelector('#laboratorio').dataset.family = 'common';
 // Tempos das animações em segundos; Arcade também inclui as pausas.
 const ARCADE_REVOLUTION_SECONDS = 30;
@@ -220,7 +220,7 @@ familyToggle.forEach(button => button.addEventListener('click', () => setFunctio
 applyGraphSelection();
 
 const labelGroup = document.querySelector('#gridLabels');
-for (let value = -1.5; value <= 1.5001; value += 0.5) {
+for (let value = -3; value <= 3; value++) {
   const coordinate = center + value * radiusSize;
   if (Math.abs(value) > 0.001 && coordinate >= 30 && coordinate <= 430) {
     const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -386,7 +386,7 @@ function update(rawAngle) {
   cscLine.style.display = cscPoint.style.display = cotLine.style.display = reciprocalPoint.style.display = cscDefined ? '' : 'none';
   document.querySelector('#secLabel').style.display = secDefined ? '' : 'none';
   document.querySelector('#cscLabel').style.display = document.querySelector('#cotLabel').style.display = cscDefined ? '' : 'none';
-  const arcRadius = 37;
+  const arcRadius = radiusSize * 0.26;
   const arcEndX = center + arcRadius * Math.cos(theta);
   const arcEndY = center - arcRadius * Math.sin(theta);
   const largeArc = deg > 180 ? 1 : 0;
@@ -405,8 +405,6 @@ function update(rawAngle) {
   document.querySelector('#cscLabel').setAttribute('x', center + 8);
   document.querySelector('#cscLabel').setAttribute('y', (center + cscY) / 2);
   document.querySelector('#cotLabel').setAttribute('x', (center + cotX) / 2);
-  document.querySelector('#xUnitLabel').setAttribute('x', center + radiusSize - 3);
-  document.querySelector('#yUnitLabel').setAttribute('y', center - radiusSize + 3);
 
   const q = deg === 0 || deg === 90 || deg === 180 || deg === 270 ? 'EIXO' : `${Math.floor(deg / 90) + 1}º QUADRANTE`;
   quadrant.textContent = q;
@@ -519,6 +517,7 @@ function pulseValues(angle) {
 }
 
 update(slider.value);
+window.setTimeout(() => document.querySelector('#loadingScreen').classList.add('is-hidden'), 2000);
 
 document.querySelectorAll('[data-tab]').forEach(tab => tab.addEventListener('click', () => {
   document.querySelectorAll('[data-tab]').forEach(item => {
