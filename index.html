@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f6f2">
+    <title>Círculo Trigonométrico — laboratório visual</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="topbar"><a class="brand" href="#inicio" aria-label="Arco, início"><span class="brand-mark">◒</span> arco<span class="brand-dot">.</span></a>
+      <nav class="tabs" role="tablist" aria-label="Seções">
+        <button class="active" role="tab" aria-selected="true" aria-controls="laboratorio" data-tab="laboratorio">Laboratório</button>
+        <button role="tab" aria-selected="false" aria-controls="conceitos" data-tab="conceitos">Conceitos</button>
+        <button role="tab" aria-selected="false" aria-controls="graficos" data-tab="graficos">Gráficos</button>
+      </nav>
+      <div class="function-family" role="group" aria-label="Tipo de funções">
+        <button class="selected" data-function-family="common" aria-pressed="true">Comuns</button>
+        <button data-function-family="reciprocal" aria-pressed="false" title="Secante, cossecante e cotangente">Recíprocas</button>
+      </div>
+    </header>
+    <main id="inicio">
+      <section class="lab tab-panel active" id="laboratorio" role="tabpanel" aria-label="Laboratório trigonométrico">
+        <div class="lab-head">
+          <h2>Ângulo e funções</h2>
+        </div>
+        <div class="lab-grid">
+          <div class="diagram-wrap">
+            <div class="angle-stamp" id="angleStamp" aria-hidden="true"><span>ÂNGULO NOTÁVEL</span><strong id="stampValue">45°</strong></div>
+            <div class="diagram-top"><span>PLANO CARTESIANO</span><span class="quadrant" id="quadrant">1º QUADRANTE</span></div>
+            <div class="diagram-body">
+              <div class="svg-holder">
+                <svg id="circle" viewBox="0 0 460 460" role="img" aria-label="Círculo trigonométrico interativo">
+                  <defs>
+                    <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+                      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#e5e9e3" stroke-width="1"/>
+                    </pattern>
+                  </defs>
+                  <rect x="30" y="30" width="400" height="400" fill="url(#grid)"/>
+                  <g id="gridLabels"></g>
+                  <line x1="30" y1="230" x2="430" y2="230" class="axis"/>
+                  <line x1="230" y1="430" x2="230" y2="30" class="axis"/>
+                  <path d="M 426 225 L 436 230 L 426 235 M 225 34 L 230 24 L 235 34" class="axis-head"/>
+                  <circle cx="230" cy="230" r="140" class="unit-circle"/>
+                  <path id="arc" class="angle-arc" d=""/>
+                  <line id="radius" x1="230" y1="230" x2="336" y2="124" class="radius"/>
+                  <line id="radiusExtension" x1="230" y1="230" x2="420" y2="40" class="radius-extension"/>
+                  <line id="cosLine" x1="230" y1="230" x2="336" y2="230" class="cos-line"/>
+                  <line id="sinLine" x1="336" y1="230" x2="336" y2="124" class="sin-line"/>
+                  <line id="tanGuide" x1="355" y1="30" x2="355" y2="430" class="tan-guide"/>
+                  <line id="tanLine" x1="355" y1="230" x2="355" y2="142" class="tan-line"/>
+                  <line id="topTanGuide" x1="30" y1="90" x2="430" y2="90" class="tan-guide top-tan-guide"/>
+                  <line id="secLine" x1="230" y1="230" x2="370" y2="142" class="reciprocal-sec"/>
+                  <line id="cscLine" x1="230" y1="230" x2="370" y2="90" class="reciprocal-csc"/>
+                  <line id="cotLine" x1="230" y1="90" x2="370" y2="90" class="reciprocal-cot"/>
+                  <line id="pointTangent" x1="250" y1="100" x2="400" y2="250" class="point-tangent"/>
+                  <path id="tangentRightAngle" class="tangent-right-angle" d=""/>
+                  <circle id="secPoint" cx="355" cy="230" r="5" class="reciprocal-point sec-point"/>
+                  <circle id="cscPoint" cx="230" cy="105" r="5" class="reciprocal-point csc-point"/>
+                  <circle id="reciprocalPoint" cx="355" cy="105" r="5" class="reciprocal-point"/>
+                  <circle cx="230" cy="230" r="4" class="origin-dot"/>
+                  <circle id="point" cx="336" cy="124" r="7" class="point"/>
+                  <text x="437" y="220" class="axis-label">x</text>
+                  <text x="240" y="25" class="axis-label">y</text>
+                  <text x="222" y="252" class="origin-label">0</text>
+                  <text id="xUnitLabel" x="370" y="250" class="tick-label">1</text>
+                  <text id="yUnitLabel" x="208" y="90" class="tick-label">1</text>
+                  <text id="cosLabel" x="280" y="250" class="measure-label cosine-label">cos</text>
+                  <text id="sinLabel" x="343" y="178" class="measure-label sine-label">sen</text>
+                  <text id="tanLabel" x="386" y="178" class="measure-label tangent-label">tg</text>
+                  <text id="secLabel" x="370" y="178" class="measure-label cosine-label">sec</text>
+                  <text id="cscLabel" x="300" y="130" class="measure-label sine-label">cossec</text>
+                  <text id="cotLabel" x="300" y="96" class="measure-label tangent-label">cotg</text>
+                </svg>
+              </div>
+              <div class="plot-readout">
+                <div><span>θ</span><b><strong id="degree">45</strong>°</b></div>
+                <div><span id="readoutSinName">sen</span><b id="sinValue">0,707</b></div>
+                <div><span id="readoutCosName">cos</span><b id="cosValue">0,707</b></div>
+                <div><span id="readoutTanName">tg</span><b id="tanValue">1,000</b></div>
+              </div>
+            </div>
+            <div class="diagram-legend">
+              <span><i class="legend-cos"></i><b id="circleLegendCos">cosseno</b></span>
+              <span><i class="legend-sin"></i><b id="circleLegendSin">seno</b></span>
+              <span><i class="legend-tan"></i><b id="circleLegendTan">tangente</b></span>
+            </div>
+          </div>
+          <aside class="controls">
+            <div class="control-main">
+              <div class="control-angle">
+                <div class="angle-display"><span class="section-kicker">ÂNGULO</span>
+                  <div class="angle-value"><strong id="controlDegree">45</strong><span>°</span></div>
+                </div>
+                <div class="radian"><span>RAD</span><strong id="radian">π / 4</strong></div>
+              </div>
+              <div class="slider-control">
+                <label class="slider-label" for="angle"><span>AJUSTAR</span><span id="sliderDegree">45°</span></label>
+                <input id="angle" type="range" min="0" max="359" value="45" aria-label="Ângulo em graus">
+              </div>
+              <div class="animation-modes" aria-label="Modo de animação">
+                <button class="mode-button arcade-mode" id="playArcade" type="button"><span class="play-icon">▶</span><span class="mode-text">Arcade</span></button>
+                <button class="mode-button smooth-mode" id="playSmooth" type="button"><span class="play-icon">▶</span><span class="mode-text">Contínuo</span></button>
+              </div>
+            </div>
+            <div class="preset-row" aria-label="Ângulos notáveis dos quatro quadrantes">
+              <button data-angle="0">0°</button>
+              <button data-angle="30">30°</button>
+              <button data-angle="45" class="selected">45°</button>
+              <button data-angle="60">60°</button>
+              <button data-angle="90">90°</button>
+              <button data-angle="120">120°</button>
+              <button data-angle="135">135°</button>
+              <button data-angle="150">150°</button>
+              <button data-angle="180">180°</button>
+              <button data-angle="210">210°</button>
+              <button data-angle="225">225°</button>
+              <button data-angle="240">240°</button>
+              <button data-angle="270">270°</button>
+              <button data-angle="300">300°</button>
+              <button data-angle="315">315°</button>
+              <button data-angle="330">330°</button>
+            </div>
+            <div class="function-list">
+              <div class="function-row cosine"><span class="function-symbol" id="symbolCos">cos</span><strong id="controlCos">0,707</strong></div>
+              <div class="function-row sine"><span class="function-symbol" id="symbolSin">sen</span><strong id="controlSin">0,707</strong></div>
+              <div class="function-row tangent"><span class="function-symbol" id="symbolTan">tg</span><strong id="controlTan">1,000</strong></div>
+            </div>
+          </aside>
+        </div>
+        <div class="insight">
+          <p id="insightText">Ponto: (0,707; 0,707)</p>
+        </div>
+      </section>
+      <section class="function-graph tab-panel" id="graficos" role="tabpanel" aria-label="Gráficos de seno, cosseno e tangente">
+        <div class="graph-heading">
+          <div><span class="section-kicker">PLANO CARTESIANO · 0° A 360°</span>
+            <h2>Gráficos das funções</h2>
+          </div>
+          <div class="graph-options" role="group" aria-label="Selecionar função para desenhar">
+            <button class="selected" data-graph="sin" aria-pressed="true">Seno</button>
+            <button data-graph="cos" aria-pressed="false">Cosseno</button>
+            <button data-graph="tan" aria-pressed="false">Tangente</button>
+            <button data-graph="all" aria-pressed="false">Todas</button>
+          </div>
+        </div>
+        <div class="graph-sheet">
+          <svg id="functionPlot" viewBox="0 0 800 470" role="img" aria-label="Gráfico de função trigonométrica em função do ângulo">
+            <defs><clipPath id="graphClip">
+              <rect x="60" y="35" width="720" height="385"/>
+</clippath></defs>
+            <rect x="60" y="35" width="720" height="385" class="graph-background"/>
+            <g id="graphGrid"></g>
+            <g class="graph-asymptotes" id="graphAsymptotes">
+              <line x1="240" y1="35" x2="240" y2="420"/>
+              <line x1="600" y1="35" x2="600" y2="420"/>
+            </g>
+            <g class="graph-asymptotes reciprocal-asymptotes" id="reciprocalAsymptotes">
+              <line x1="60" y1="35" x2="60" y2="420"/>
+              <line x1="420" y1="35" x2="420" y2="420"/>
+              <line x1="780" y1="35" x2="780" y2="420"/>
+            </g>
+            <line x1="60" y1="227.5" x2="780" y2="227.5" class="graph-axis"/>
+            <line x1="60" y1="35" x2="60" y2="420" class="graph-axis"/>
+            <g clip-path="url(#graphClip)">
+              <path id="graphSin" class="graph-line graph-sin"/>
+              <path id="graphCos" class="graph-line graph-cos"/>
+              <path id="graphTan" class="graph-line graph-tan"/>
+              <path id="graphSec" class="graph-line graph-cos"/>
+              <path id="graphCsc" class="graph-line graph-sin"/>
+              <path id="graphCot" class="graph-line graph-tan"/>
+              <line id="graphCursor" x1="150" y1="35" x2="150" y2="420" class="graph-cursor"/>
+              <circle id="markerSin" r="6" class="graph-marker marker-sin"/>
+              <circle id="markerCos" r="6" class="graph-marker marker-cos"/>
+              <circle id="markerTan" r="6" class="graph-marker marker-tan"/>
+              <circle id="markerSec" r="6" class="graph-marker marker-cos"/>
+              <circle id="markerCsc" r="6" class="graph-marker marker-sin"/>
+              <circle id="markerCot" r="6" class="graph-marker marker-tan"/>
+            </g>
+            <g id="graphLabels"></g>
+          </svg>
+        </div>
+        <div class="graph-legend">
+          <span class="legend-item graph-sin-key"><i></i><span id="legendSin">sen θ</span></span>
+          <span class="legend-item graph-cos-key"><i></i><span id="legendCos">cos θ</span></span>
+          <span class="legend-item graph-tan-key"><i></i><span id="legendTan">tg θ</span></span>
+          <span class="graph-current" id="graphCurrent">θ = 45°</span>
+        </div>
+      </section>
+      <section class="concepts tab-panel" id="conceitos" data-family="common" role="tabpanel" aria-label="Conceitos trigonométricos">
+        <div class="concept-heading"><span class="section-kicker">CÍRCULO UNITÁRIO · RAIO 1</span>
+          <h2>Três nomes.
+            <br>
+<em>Um ponto.</em></h2>
+          <p id="conceptDescription">Uma posição na circunferência revela três medidas:</p>
+        </div>
+        <div class="concept-cards concepts-common">
+          <article class="concept-card cosine-card">
+            <div class="concept-card-heading"><span class="card-index">01</span>
+              <h3>Cosseno</h3>
+            </div>
+            <p class="definition">É a coordenada <b>x</b> do ponto na circunferência: sua projeção horizontal sobre o eixo x.</p>
+            <div class="formula">cos(θ) = x</div>
+            <svg class="concept-figure" viewBox="0 0 180 100" role="img" aria-label="O cosseno é a projeção horizontal do ponto">
+              <line x1="18" y1="70" x2="162" y2="70" class="fig-axis"/>
+              <circle cx="70" cy="58" r="37" class="fig-circle"/>
+              <line x1="70" y1="58" x2="98" y2="32" class="fig-radius"/>
+              <line x1="70" y1="58" x2="98" y2="58" class="fig-cos"/>
+              <line x1="98" y1="32" x2="98" y2="58" class="fig-guide"/>
+              <circle cx="98" cy="32" r="4" class="fig-point"/>
+              <text x="79" y="82" class="fig-label">cos θ</text>
+            </svg>
+          </article>
+          <article class="concept-card sine-card">
+            <div class="concept-card-heading"><span class="card-index">02</span>
+              <h3>Seno</h3>
+            </div>
+            <p class="definition">É a coordenada <b>y</b> do ponto na circunferência: sua projeção vertical sobre o eixo y.</p>
+            <div class="formula">sen(θ) = y</div>
+            <svg class="concept-figure" viewBox="0 0 180 100" role="img" aria-label="O seno é a projeção vertical do ponto">
+              <line x1="20" y1="70" x2="160" y2="70" class="fig-axis"/>
+              <line x1="70" y1="90" x2="70" y2="12" class="fig-axis"/>
+              <circle cx="70" cy="58" r="37" class="fig-circle"/>
+              <line x1="70" y1="58" x2="98" y2="32" class="fig-radius"/>
+              <line x1="98" y1="32" x2="98" y2="58" class="fig-sin"/>
+              <line x1="70" y1="58" x2="98" y2="58" class="fig-guide"/>
+              <circle cx="98" cy="32" r="4" class="fig-point"/>
+              <text x="104" y="48" class="fig-label">sen θ</text>
+            </svg>
+          </article>
+          <article class="concept-card tangent-card">
+            <div class="concept-card-heading"><span class="card-index">03</span>
+              <h3>Tangente</h3>
+            </div>
+            <p class="definition">É a razão entre seno e cosseno. Na reta <b>x = 1</b>, mede o segmento até a linha do ângulo.</p>
+            <div class="formula">tg(θ) = sen(θ) / cos(θ)</div>
+            <svg class="concept-figure" viewBox="0 0 180 100" role="img" aria-label="A tangente é o segmento vertical na reta x igual a um">
+              <line x1="18" y1="70" x2="164" y2="70" class="fig-axis"/>
+              <circle cx="65" cy="58" r="37" class="fig-circle"/>
+              <line x1="65" y1="58" x2="115" y2="30" class="fig-radius"/>
+              <line x1="102" y1="18" x2="102" y2="88" class="fig-tan-guide"/>
+              <line x1="102" y1="70" x2="102" y2="37" class="fig-tan"/>
+              <circle cx="98" cy="39" r="4" class="fig-point"/>
+              <text x="108" y="54" class="fig-label">tg θ</text>
+            </svg>
+          </article>
+        </div>
+        <div class="concept-cards concepts-reciprocal">
+          <article class="concept-card reciprocal-sec-card">
+            <div class="concept-card-heading"><span class="card-index">01</span>
+              <h3>Secante</h3>
+            </div>
+            <p class="definition">É o inverso multiplicativo do cosseno. A tangente no ponto encontra o eixo x em <b>sec(θ)</b>.</p>
+            <div class="formula">sec(θ) = 1 / cos(θ)</div>
+            <svg class="concept-figure" viewBox="0 0 180 100" role="img" aria-label="A tangente no ponto encontra o eixo x no valor da secante">
+              <line x1="18" y1="68" x2="162" y2="68" class="fig-axis"/>
+              <line x1="70" y1="96" x2="70" y2="12" class="fig-axis"/>
+              <circle cx="70" cy="68" r="30" class="fig-circle"/>
+              <line x1="70" y1="68" x2="91.2" y2="46.8" class="fig-radius"/>
+              <line x1="30" y1="-14" x2="145" y2="101" class="fig-extra-tangent"/>
+              <line x1="70" y1="68" x2="112.4" y2="68" class="fig-cos"/>
+              <circle cx="112.4" cy="68" r="4" class="fig-point"/>
+              <text x="83" y="82" class="fig-label">sec θ</text>
+            </svg>
+          </article>
+          <article class="concept-card reciprocal-csc-card">
+            <div class="concept-card-heading"><span class="card-index">02</span>
+              <h3>Cossecante</h3>
+            </div>
+            <p class="definition">É o inverso multiplicativo do seno. A tangente no ponto encontra o eixo y em <b>cossec(θ)</b>.</p>
+            <div class="formula">cossec(θ) = 1 / sen(θ)</div>
+            <svg class="concept-figure" viewBox="0 0 180 100" role="img" aria-label="A tangente no ponto encontra o eixo y no valor da cossecante">
+              <line x1="18" y1="68" x2="162" y2="68" class="fig-axis"/>
+              <line x1="70" y1="98" x2="70" y2="8" class="fig-axis"/>
+              <circle cx="70" cy="68" r="30" class="fig-circle"/>
+              <line x1="70" y1="68" x2="91.2" y2="46.8" class="fig-radius"/>
+              <line x1="30" y1="-14" x2="145" y2="101" class="fig-extra-tangent"/>
+              <line x1="70" y1="68" x2="70" y2="25.6" class="fig-sin"/>
+              <circle cx="70" cy="25.6" r="4" class="fig-point"/>
+              <text x="77" y="40" class="fig-label">cossec θ</text>
+            </svg>
+          </article>
+          <article class="concept-card reciprocal-cot-card">
+            <div class="concept-card-heading"><span class="card-index">03</span>
+              <h3>Cotangente</h3>
+            </div>
+            <p class="definition">É a razão entre cosseno e seno. Na tangente superior do círculo, mede o trecho horizontal até o ângulo.</p>
+            <div class="formula">cotg(θ) = cos(θ) / sen(θ)</div>
+            <svg class="concept-figure" viewBox="0 0 180 100" role="img" aria-label="A cotangente é o trecho horizontal na tangente superior do círculo">
+              <line x1="18" y1="72" x2="162" y2="72" class="fig-axis"/>
+              <circle cx="70" cy="72" r="30" class="fig-circle"/>
+              <line x1="70" y1="42" x2="160" y2="42" class="fig-extra-tangent"/>
+              <line x1="70" y1="72" x2="96" y2="57" class="fig-radius"/>
+              <line x1="96" y1="57" x2="122" y2="42" class="fig-radius"/>
+              <line x1="70" y1="42" x2="122" y2="42" class="fig-tan"/>
+              <circle cx="122" cy="42" r="4" class="fig-point"/>
+              <circle cx="96" cy="57" r="4" class="fig-point"/>
+              <text x="83" y="34" class="fig-label">cotg θ</text>
+            </svg>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <a class="brand" href="#inicio"><span class="brand-mark">◒</span> arco<span class="brand-dot">.</span></a>
+      <span>MATEMÁTICA, EM OUTRO ÂNGULO.</span>
+      <a href="#laboratorio" data-go-lab>VOLTAR AO LAB ↑</a>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
