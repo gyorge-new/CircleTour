@@ -1,0 +1,105 @@
+function one(selector) {
+  const element = document.querySelector(selector);
+  if (!element) throw new Error(`Elemento obrigatório não encontrado: ${selector}`);
+  return element;
+}
+
+function all(selector) {
+  return [...document.querySelectorAll(selector)];
+}
+
+export const dom = {
+  controls: {
+    angle: one('#angle'),
+    functionRows: all('.function-row'),
+    valueCards: all('.plot-readout div'),
+    presets: all('.preset-row button'),
+    familyToggles: all('[data-function-family]'),
+    playArcade: one('#playArcade'),
+    playSmooth: one('#playSmooth'),
+    playNextNotable: one('#playNextNotable'),
+  },
+  circle: {
+    panel: one('#laboratorio'),
+    angle: one('#angle'),
+    presets: all('.preset-row button'),
+    degree: one('#degree'),
+    controlDegree: one('#controlDegree'),
+    sliderDegree: one('#sliderDegree'),
+    radian: one('#radian'),
+    controlValues: [one('#controlSin'), one('#controlCos'), one('#controlTan')],
+    point: one('#point'),
+    radius: one('#radius'),
+    radiusExtension: one('#radiusExtension'),
+    cosineLine: one('#cosLine'),
+    sineLine: one('#sinLine'),
+    tangentGuide: one('#tanGuide'),
+    tangentLine: one('#tanLine'),
+    topTangentGuide: one('#topTanGuide'),
+    arc: one('#arc'),
+    quadrant: one('#quadrant'),
+    insight: one('#insightText'),
+    labels: one('#gridLabels'),
+    functionValues: [one('#sinValue'), one('#cosValue'), one('#tanValue')],
+    functionNames: [
+      one('#readoutSinName'),
+      one('#readoutCosName'),
+      one('#readoutTanName'),
+    ],
+    functionSymbols: [one('#symbolSin'), one('#symbolCos'), one('#symbolTan')],
+    functionLabels: [one('#sinLabel'), one('#cosLabel'), one('#tanLabel')],
+    legend: [
+      one('#circleLegendSin'),
+      one('#circleLegendCos'),
+      one('#circleLegendTan'),
+    ],
+    secantLine: one('#secLine'),
+    cosecantLine: one('#cscLine'),
+    cotangentLine: one('#cotLine'),
+    secantPoint: one('#secPoint'),
+    cosecantPoint: one('#cscPoint'),
+    cotangentPoint: one('#reciprocalPoint'),
+    pointTangent: one('#pointTangent'),
+    tangentRightAngle: one('#tangentRightAngle'),
+    secantLabel: one('#secLabel'),
+    cosecantLabel: one('#cscLabel'),
+    cotangentLabel: one('#cotLabel'),
+    stamp: one('#angleStamp'),
+    stampValue: one('#stampValue'),
+  },
+  graph: {
+    panel: one('#graficos'),
+    grid: one('#graphGrid'),
+    labels: one('#graphLabels'),
+    current: one('#graphCurrent'),
+    cursor: one('#graphCursor'),
+    commonAsymptotes: one('#graphAsymptotes'),
+    reciprocalAsymptotes: one('#reciprocalAsymptotes'),
+    legend: [one('#legendSin'), one('#legendCos'), one('#legendTan')],
+    buttons: all('[data-graph]'),
+    paths: {
+      sin: one('#graphSin'),
+      cos: one('#graphCos'),
+      tan: one('#graphTan'),
+      sec: one('#graphSec'),
+      csc: one('#graphCsc'),
+      cot: one('#graphCot'),
+    },
+    markers: {
+      sin: one('#markerSin'),
+      cos: one('#markerCos'),
+      tan: one('#markerTan'),
+      sec: one('#markerSec'),
+      csc: one('#markerCsc'),
+      cot: one('#markerCot'),
+    },
+  },
+  concepts: {
+    panel: one('#conceitos'),
+    description: one('#conceptDescription'),
+  },
+  loading: one('#loadingScreen'),
+  tabs: all('[data-tab]'),
+  panels: all('.tab-panel'),
+  backToLab: one('[data-go-lab]'),
+};
