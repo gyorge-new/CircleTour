@@ -2180,6 +2180,10 @@ footer {
   justify-content: flex-end;
   gap: 5px;
 }
+.animation-modes .mode-button {
+  flex: 1;
+  min-width: 0;
+}
 .mode-button {
   height: 36px;
   min-width: 72px;
@@ -2216,8 +2220,14 @@ footer {
   color: #fff;
   box-shadow: 0 2px 0 #2e3d50;
 }
+.mode-button.next-mode.playing {
+  background: #8b6940;
+  border-color: #8b6940;
+  color: #fff;
+  box-shadow: 0 2px 0 #6a4e30;
+}
 .control-main {
-  grid-template-columns: 150px minmax(180px,1fr) 156px;
+  grid-template-columns: 150px minmax(180px,1fr) 230px;
 }
 .control-main .animation-modes {
   grid-column: 3;
@@ -2225,7 +2235,7 @@ footer {
 }
 @media(max-width:750px) {
   .control-main {
-    grid-template-columns: 130px minmax(130px,1fr) 132px;
+    grid-template-columns: 130px minmax(130px,1fr) 184px;
   }
   .control-main .animation-modes {
     grid-column: 3;
@@ -2239,7 +2249,7 @@ footer {
 }
 @media(max-width:550px) {
   .control-main {
-    grid-template-columns: 76px minmax(85px,1fr) 112px;
+    grid-template-columns: 64px minmax(60px,1fr) 138px;
     gap: 5px;
   }
   .control-main .animation-modes {

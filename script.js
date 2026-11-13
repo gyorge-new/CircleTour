@@ -17,6 +17,7 @@ const quadrant = document.querySelector('#quadrant');
 const insightText = document.querySelector('#insightText');
 const playArcade = document.querySelector('#playArcade');
 const playSmooth = document.querySelector('#playSmooth');
+const playNextNotable = document.querySelector('#playNextNotable');
 const presets = [...document.querySelectorAll('.preset-row button')];
 const controlCos = document.querySelector('#controlCos');
 const controlSin = document.querySelector('#controlSin');
@@ -445,10 +446,10 @@ presets.forEach(button => button.addEventListener('click', () => {
 function stopAnimation() {
   if (animationFrame) cancelAnimationFrame(animationFrame);
   animationFrame = null;
-  [playArcade, playSmooth].forEach(button => {
+  [playArcade, playSmooth, playNextNotable].forEach(button => {
     button.classList.remove('playing');
-    button.querySelector('.mode-text').textContent = button === playArcade ? 'Arcade' : 'Contínuo';
-    button.querySelector('.play-icon').textContent = '▶';
+    button.querySelector('.mode-text').textContent = button === playArcade ? 'Arcade' : button === playSmooth ? 'Contínuo' : 'Próximo';
+    button.querySelector('.play-icon').textContent = button === playNextNotable ? '↦' : '▶';
   });
   angleStamp.classList.remove('stamp-hit');
 }
@@ -495,12 +496,42 @@ function startAnimation(mode) {
 
 playArcade.addEventListener('click', () => startAnimation('arcade'));
 playSmooth.addEventListener('click', () => startAnimation('smooth'));
+playNextNotable.addEventListener('click', animateToNextNotable);
 
 function nextNotableAngle(angle) {
   const revolution = Math.floor(angle / 360) * 360;
   const withinRevolution = angle - revolution;
   const next = NOTABLE_ANGLES.find(notable => notable > withinRevolution + 1e-7);
   return revolution + (next === undefined ? 360 : next);
+}
+
+function animateToNextNotable() {
+  if (animationFrame && playNextNotable.classList.contains('playing')) return stopAnimation();
+  stopAnimation();
+  playNextNotable.classList.add('playing');
+  playNextNotable.querySelector('.mode-text').textContent = 'Próximo';
+  playNextNotable.querySelector('.play-icon').textContent = 'Ⅱ';
+  const startAngle = Number(slider.value);
+  const targetAngle = nextNotableAngle(startAngle);
+  const destination = targetAngle % 360;
+  const distance = targetAngle - startAngle;
+  const duration = Math.max(300, distance * SMOOTH_REVOLUTION_SECONDS * 1000 / 360);
+  let startedAt = null;
+  const animate = time => {
+    if (startedAt === null) startedAt = time;
+    const progress = Math.min((time - startedAt) / duration, 1);
+    const eased = 1 - (1 - progress) ** 3;
+    const currentAngle = startAngle + distance * eased;
+    slider.value = progress === 1 ? destination : Math.floor(currentAngle % 360);
+    update(slider.value);
+    if (progress === 1) {
+      stopAnimation();
+      pulseValues(destination);
+      return;
+    }
+    animationFrame = requestAnimationFrame(animate);
+  };
+  animationFrame = requestAnimationFrame(animate);
 }
 
 function pulseValues(angle) {
