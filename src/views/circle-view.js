@@ -156,10 +156,11 @@ export class CircleView {
     elements.cosecantLabel.setAttribute('x', center + 8);
     elements.cosecantLabel.setAttribute('y', (center + cosecantY) / 2);
     elements.cotangentLabel.setAttribute('x', (center + cotangentX) / 2);
+    elements.cotangentLabel.setAttribute('y', cotangentY - 10);
   }
 
   positionFunctionLabels({ cos, sin, tangent, x, y, tangentX, center, radius }) {
-    const [cosLabel, sinLabel, tanLabel] = this.elements.functionLabels;
+    const [sinLabel, cosLabel, tanLabel] = this.elements.functionLabels;
     cosLabel.setAttribute('x', center + (radius * cos) / 2 - 10);
     cosLabel.setAttribute('y', center + (sin >= 0 ? 20 : -9));
     sinLabel.setAttribute('x', x + (cos >= 0 ? 7 : -28));
