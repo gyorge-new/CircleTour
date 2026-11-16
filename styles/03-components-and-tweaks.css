@@ -108,6 +108,44 @@
   background: var(--paper);
   transition: opacity .2s ease, visibility .2s ease;
 }
+.loading-screen img {
+  height: 20%;
+  aspect-ratio: 1:1;
+}
+.logo-name {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+.footer-credit {
+  position: absolute;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  transform: translateX(-50%);
+}
+footer {
+  position: relative;
+}
+.footer-credit span {
+  color: #9da39a;
+  font-size: 16px;
+}
+@media(max-width:650px) {
+  .footer-credit {
+    gap: 4px;
+  }
+  .logo-name {
+    width: 32px;
+    height: 32px;
+  }
+  .footer-credit span {
+    font-size: 14px;
+  }
+}
 .loading-screen.is-hidden {
   opacity: 0;
   visibility: hidden;
