@@ -2,15 +2,9 @@
 
 Laboratório visual de trigonometria feito com HTML, CSS e módulos JavaScript nativos.
 
-## Executar localmente
+## Abrir no Navegador
 
-Como o projeto usa módulos ES, abra-o por um servidor local. Na pasta do projeto, execute:
-
-```sh
-python3 -m http.server 8000
-```
-
-Depois acesse `http://localhost:8000`.
+acesse https://gyorge-new.github.io/CircleTour/
 
 ## Estrutura
 
