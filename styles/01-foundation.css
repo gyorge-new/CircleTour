@@ -198,6 +198,19 @@ body {
   stroke-width: 3;
   stroke-linecap: round;
 }
+.sine-projection,
+.cosine-projection {
+  stroke: #4f8d6b;
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+  opacity: .8;
+}
+.cosine-projection {
+  stroke: #d7a86d;
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+  opacity: 1;
+}
 .tan-line {
   stroke: #d77966;
   stroke-width: 3;

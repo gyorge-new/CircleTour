@@ -845,7 +845,9 @@ footer {
   gap: 16px!important;
 }
 .lab[data-family="reciprocal"] #cosLine,
+.lab[data-family="reciprocal"] #cosProjection,
 .lab[data-family="reciprocal"] #sinLine,
+.lab[data-family="reciprocal"] #sinProjection,
 .lab[data-family="reciprocal"] #tanGuide,
 .lab[data-family="reciprocal"] #tanLine,
 .lab[data-family="reciprocal"] #cosLabel,

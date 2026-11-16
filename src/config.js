@@ -14,7 +14,7 @@ export const graphConfig = {
 };
 
 export const animationConfig = {
-  arcadeRevolutionSeconds: 30,
+  arcadeRevolutionSeconds: 35,
   smoothRevolutionSeconds: 6.7,
   arcadePauseMilliseconds: 1500,
 };

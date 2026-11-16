@@ -69,7 +69,12 @@ export class CircleView {
     if (extension) setLine(elements.radiusExtension, extension[0].x, extension[0].y, extension[1].x, extension[1].y);
 
     setLine(elements.cosineLine, center, center, x, center);
-    setLine(elements.sineLine, x, center, x, y);
+    setLine(elements.cosineProjection, x, y, x, center);
+    const cosineProjectionVisible = family === 'common' && Math.abs(cos) > 1e-8;
+    elements.cosineProjection.style.display = cosineProjectionVisible ? 'inline' : 'none';
+    setLine(elements.sineLine, center, center, center, y);
+    setLine(elements.sineProjection, x, y, center, y);
+    elements.sineProjection.style.display = Math.abs(sin) > 1e-8 ? '' : 'none';
 
     const tangentX = center + radius;
     const tangentY = center - radius * tangent;
@@ -162,8 +167,8 @@ export class CircleView {
   positionFunctionLabels({ cos, sin, tangent, x, y, tangentX, center, radius }) {
     const [sinLabel, cosLabel, tanLabel] = this.elements.functionLabels;
     cosLabel.setAttribute('x', center + (radius * cos) / 2 - 10);
-    cosLabel.setAttribute('y', center + (sin >= 0 ? 20 : -9));
-    sinLabel.setAttribute('x', x + (cos >= 0 ? 7 : -28));
+    cosLabel.setAttribute('y', center + 20);
+    sinLabel.setAttribute('x', center + 7);
     sinLabel.setAttribute('y', center + (y - center) / 2 + (sin >= 0 ? 0 : 12));
     tanLabel.setAttribute('x', tangentX + 7);
     tanLabel.setAttribute('y', Math.max(40, Math.min(420, center - radius * tangent / 2)));
