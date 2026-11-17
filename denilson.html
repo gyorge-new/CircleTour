@@ -49,20 +49,20 @@ const quad=a=>{const d=md(a*180/P,360);return Math.abs(d%90)<1e-6||Math.abs(d%90
 function dc(a,o={}){const sh=o.sh||S.sh,c=Math.cos(a),s=Math.sin(a),t=V('tan',a),k=V('cot',a),Z=v=>Math.max(-40,Math.min(40,v));let h='';
 const L=(x1,y1,x2,y2,col,w=.03,d)=>`<line x1="${x1}" y1="${-y1}" x2="${x2}" y2="${-y2}" stroke="${col}" stroke-width="${w}" ${d?`stroke-dasharray="${d}"`:''} stroke-linecap="round"/>`;
 const X=(x,y,t,sz=.13,col='var(--mu)',an='middle')=>`<text x="${x}" y="${-y}" font-size="${sz}" fill="${col}" text-anchor="${an}">${t}</text>`;
-h+=`<line x1="-2.5" x2="2.5" y1="0" y2="0" stroke="var(--mu)" stroke-width=".02"/><line y1="-2.5" y2="2.5" x1="0" x2="0" stroke="var(--mu)" stroke-width=".02"/>${X(2.45,.14,'x')}${X(.12,2.4,'y')}${X(-.12,-.1,'O(0,0)',.11)}<circle r="1" fill="rgba(3,150,254,.05)" stroke="var(--b1)" stroke-width=".035"/>`;
+h+=`<line x1="-2.5" x2="2.5" y1="0" y2="0" stroke="var(--mu)" stroke-width=".02"/><line y1="-2.5" y2="2.5" x1="0" x2="0" stroke="var(--mu)" stroke-width=".02"/>${X(1.9,-.18,'Eixo dos Cossenos',.1)}${X(.12,2.4,'Eixo dos Senos',.1,'var(--mu)','start')}${X(-.12,-.1,'O(0,0)',.11)}<circle r="1" fill="rgba(3,150,254,.05)" stroke="var(--b1)" stroke-width=".035"/>`;
 [['I',.55,.55],['II',-.55,.55],['III',-.55,-.55],['IV',.55,-.55]].forEach(q=>h+=X(q[1],q[2]-.04,q[0],.2,'var(--bd)'));
 if(!o.min)for(let d=0;d<360;d+=30){[45,135,225,315].includes(d)||0;h+=''}
 const ds=o.min?[0,90,180,270]:[0,30,45,60,90,120,135,150,180,210,225,240,270,300,315,330];
 ds.forEach(d=>{const r=d*P/180,cc=Math.cos(r),ss=Math.sin(r);h+=L(cc*.96,ss*.96,cc*1.04,ss*1.04,'var(--mu)',.02)+X(cc*1.2,ss*1.2-.04,d+'°',.105,'var(--tx)')+X(cc*1.42,ss*1.42-.04,rl(d),.09,'var(--b1)')});
-if(sh.aux&&!o.min){if(Math.abs(c)>1e-9)h+=L(1,-3,1,3,'var(--bd)',.012);if(Math.abs(s)>1e-9)h+=L(-3,1,3,1,'var(--bd)',.012);h+=L(-c*3,-s*3,c*3,s*3,'var(--bd)',.012)}
+
 if(o.guide)h+=o.guide;
 const w=a%T,ar=.3;h+=`<path d="M${ar} 0 A${ar} ${ar} 0 ${Math.abs(w)>P?1:0} ${w>=0?0:1} ${ar*Math.cos(w)} ${-ar*Math.sin(w)}" fill="rgba(54,228,115,.25)" stroke="var(--g1)" stroke-width=".03"/>`;
 h+=L(0,0,c,s,'var(--tx)',.03);
 if(sh.proj){h+=L(c,s,0,s,'var(--sl)',.018,'.05 .04')+L(c,s,c,0,'var(--sl)',.018,'.05 .04')}
-if(sh.cos)h+=L(0,0,c,0,CL.cos,.055);if(sh.sin)h+=L(c,0,c,s,CL.sin,.055);
-if(sh.tan&&isFinite(t))h+=L(1,0,1,Z(t),CL.tan,.05);if(sh.sec&&isFinite(t))h+=L(0,0,1,Z(t),CL.sec,.035,'.09 .06');
-if(sh.cot&&isFinite(k))h+=L(0,1,Z(k),1,CL.cot,.05);if(sh.csc&&isFinite(k))h+=L(0,0,Z(k),1,CL.csc,.035,'.09 .06');
-if(sh.val){if(sh.sin)h+=X(c+(c>=0?.05:-.05),s/2,fm(s),.12,CL.sin,c>=0?'start':'end');if(sh.cos)h+=X(c/2,s>=0?-.08:.17,fm(c),.12,CL.cos);if(sh.tan&&Math.abs(t)<2.4)h+=X(1.05,Z(t)/2,fm(t),.12,CL.tan,'start')}
+if(sh.cos)h+=L(0,0,c,0,CL.cos,.055);if(sh.sin)h+=L(0,0,0,s,CL.sin,.055);
+if(sh.tan||sh.sec)h+=L(1,-3,1,3,CL.tan,.012)+X(1.06,2.3,'Eixo das Tangentes',.1,CL.tan,'start');if(sh.tan&&isFinite(t))h+=L(1,0,1,Z(t),CL.tan,.055);if(sh.sec&&isFinite(t))h+=L(0,0,1,Z(t),CL.sec,.06);
+if(sh.cot)h+=L(-3,1,3,1,CL.cot,.012)+X(-2.55,1.08,'Eixo das Cotangentes',.1,CL.cot,'start');if(sh.cot&&isFinite(k))h+=L(0,1,Z(k),1,CL.cot,.055);if(sh.csc&&isFinite(k))h+=L(0,0,0,Z(1/s),CL.csc,.055,'.1 .06');
+{const vl=(n,v)=>n+(sh.val?' = '+fm(v):''),cl=v=>Math.max(-2.3,Math.min(2.3,v));if(sh.sin)h+=X(-.08,s/2,vl('sen',s),.12,CL.sin,'end');if(sh.cos)h+=X(c/2,s>=0?-.1:.18,vl('cos',c),.12,CL.cos);if(sh.tan&&isFinite(t))h+=X(1.06,cl(t/2),vl('tg',t),.12,CL.tan,'start');if(sh.sec&&isFinite(t))h+=X(.45,cl(t/2)+.1,vl('sec',1/c),.12,CL.sec,'end');if(sh.cot&&isFinite(k))h+=X(cl(k/2),1.1,vl('cotg',k),.12,CL.cot);if(sh.csc&&isFinite(k))h+=X(.08,cl(1/s/2),vl('cossec',1/s),.12,CL.csc,'start')}
 (o.pts||[]).forEach(p=>h+=`<circle cx="${Math.cos(p)}" cy="${-Math.sin(p)}" r=".055" fill="var(--g2)" stroke="var(--b1)" stroke-width=".02"/>`+X(Math.cos(p)*1.0+.06,-Math.sin(p)*1.0+.0,'',0));
 h+=`<circle cx="${c}" cy="${-s}" r=".07" fill="var(--b2)" stroke="#fff" stroke-width=".02"/>`+X(c>=0?c+.1:c-.1,s>=0?s+.1:s-.05,`(${fm(c)}; ${fm(s)})`,.11,'var(--tx)',c>=0?'start':'end');return h}
 function svgDrag(el,fn){let on=0;const m=e=>{const p=el.createSVGPoint();p.x=e.clientX;p.y=e.clientY;fn(p.matrixTransform(el.getScreenCTM().inverse()))};el.onpointerdown=e=>{on=1;el.setPointerCapture(e.pointerId);m(e)};el.onpointermove=e=>{if(on)m(e)};el.onpointerup=()=>on=0}
@@ -89,7 +89,7 @@ function gWire(id,upd){$('#'+id).onclick=e=>{const d=e.target.dataset;if(d.z)S.s
 const INFO={sin:['ℝ','[−1, 1]','2π','x = kπ','nenhuma','ímpar: sen(−x) = −sen x'],cos:['ℝ','[−1, 1]','2π','x = π/2 + kπ','nenhuma','par: cos(−x) = cos x'],tan:['x ≠ π/2 + kπ','ℝ','π','x = kπ','x = π/2 + kπ','ímpar'],cot:['x ≠ kπ','ℝ','π','x = π/2 + kπ','x = kπ','ímpar'],sec:['x ≠ π/2 + kπ','(−∞,−1] ∪ [1,∞)','2π','nenhum','x = π/2 + kπ','par'],csc:['x ≠ kπ','(−∞,−1] ∪ [1,∞)','2π','nenhum','x = kπ','ímpar']};
 let raf=0;
 function lab(pre){S.fns=[...pre];mn.innerHTML=`<div class="lab"><div><div class="card"><svg id="cv" viewBox="-2.6 -2.6 5.2 5.2"></svg><input id="sl" type="range" min="0" max="360" step="1" aria-label="Ângulo"><div class="row"><button id="pl">▶ Animar</button><span style="color:var(--mu)">Arraste o ponto ou use o controle.</span></div><div class="chips" id="tg"></div></div></div><div><div class="card" id="pn"></div><div class="card"><div class="chips" id="fc"></div><svg id="gv" viewBox="0 0 720 320"></svg><div id="cu" style="color:var(--mu);min-height:22px">Passe o cursor sobre o gráfico.</div>${gBtns('gb')}<div id="ig"></div></div></div></div>`;
-const tg=[['sin','sen'],['cos','cos'],['tan','tg'],['cot','cotg'],['sec','sec'],['csc','cossec'],['proj','Projeções'],['aux','Linhas auxiliares'],['val','Valores']];
+const tg=[['sin','sen'],['cos','cos'],['tan','tg'],['cot','cotg'],['sec','sec'],['csc','cossec'],['proj','Projeções'],['val','Valores']];
 const drawT=()=>{$('#tg').innerHTML=tg.map(t=>`<button data-k="${t[0]}" class="${S.sh[t[0]]?'on':''}">${t[1]}</button>`).join('');$('#fc').innerHTML='Gráficos: '+Object.keys(F).map(n=>`<button data-f="${n}" class="${S.fns.includes(n)?'on':''}" style="${S.fns.includes(n)?'':'border-color:'+CL[n]}">${N[n]}</button>`).join('')};
 const gu=gMount($('#gv'),$('#cu'),()=>S.fns.map(mk),()=>upd());
 function upd(){const a=S.a,d=a*180/P,e=ex(d);$('#cv').innerHTML=dc(a);$('#sl').value=md(d,360)>359.5&&d<360?0:md(d,360);gu();
